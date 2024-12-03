@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieDetailPage from "./MovieDetailPage";
-import dubflixLogo from "../assets/dubflix.png"; // Import your logo image
+import dubflixLogo from "../assets/dubflix.png"; 
 
 const Home = () => {
-  const [movies, setMovies] = useState([]); // Movies displayed
-  const [originalMovies, setOriginalMovies] = useState([]); // Original random movies list
-  const [selectedMovie, setSelectedMovie] = useState(null); // Selected movie for full details
-  const [searchQuery, setSearchQuery] = useState(""); // Current search input
-  const [isLoading, setIsLoading] = useState(false); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [movies, setMovies] = useState([]); 
+  const [originalMovies, setOriginalMovies] = useState([]); 
+  const [selectedMovie, setSelectedMovie] = useState(null); 
+  const [searchQuery, setSearchQuery] = useState(""); 
+  const [isLoading, setIsLoading] = useState(false); 
+  const [error, setError] = useState(null); 
 
-  const apiKey = "bb88e186"; // Replace with your OMDb API key
+  const apiKey = "bb88e186"; 
   const apiUrl = "http://www.omdbapi.com/";
 
-  // Fetch random movies for initial display
+  
   useEffect(() => {
     const fetchRandomMovies = async () => {
       setIsLoading(true);
@@ -22,7 +22,7 @@ const Home = () => {
 
       try {
         const moviePromises = [];
-        for (let i = 1; i <= 3; i++) { // Fetch random pages of movies
+        for (let i = 1; i <= 3; i++) { 
           moviePromises.push(
             axios.get(apiUrl, {
               params: { s: "movie", apikey: apiKey, page: i },
@@ -34,9 +34,9 @@ const Home = () => {
         const fetchedMovies = movieResponses
           .map((response) => response.data.Search)
           .flat()
-          .filter(Boolean); // Remove null values
+          .filter(Boolean); 
         setMovies(fetchedMovies);
-        setOriginalMovies(fetchedMovies); // Save the original movies list
+        setOriginalMovies(fetchedMovies); 
       } catch (error) {
         console.error("Error fetching random movies:", error);
         setError("Failed to fetch movies.");
@@ -48,7 +48,7 @@ const Home = () => {
     fetchRandomMovies();
   }, []);
 
-  // Fetch movies based on search query
+  
   const fetchMoviesByQuery = async (query) => {
     setIsLoading(true);
     setError(null);
@@ -60,12 +60,12 @@ const Home = () => {
 
       if (response.data.Response === "True") {
         const sortedMovies = response.data.Search.sort((a, b) => {
-          // Sorting movies from old to new based on year
+          
           return a.Year - b.Year;
         });
         setMovies(sortedMovies);
       } else {
-        setMovies([]); // Clear the movie list if no results
+        setMovies([]); 
       }
     } catch (error) {
       console.error("Error fetching searched movies:", error);
@@ -75,7 +75,7 @@ const Home = () => {
     }
   };
 
-  // Fetch full details of the selected movie
+  
   const handleMovieClick = async (movie) => {
     try {
       const response = await axios.get(apiUrl, {
@@ -92,35 +92,35 @@ const Home = () => {
     }
   };
 
-  // Handle search input change
+  
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
 
     if (query.trim() === "") {
-      // If search input is cleared, reset to the original movies list
+      
       setMovies(originalMovies);
     } else {
-      // Fetch movies based on the query
+      
       fetchMoviesByQuery(query);
     }
   };
 
-  // Trigger search on pressing Enter
+  
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && searchQuery.trim() !== "") {
       fetchMoviesByQuery(searchQuery.trim());
     }
   };
 
-  // Close the movie details modal
+  
   const handleCloseMovieDetails = () => {
     setSelectedMovie(null);
   };
 
   return (
     <div className="p-6 bg-gray-800 min-h-screen">
-      {/* Logo */}
+      {}
       <div className="flex items-center mb-4">
         <img src={dubflixLogo} alt="Dubflix Logo" className="h-12 mr-4" />
         <h1 className="text-white text-3xl font-bold">
@@ -129,7 +129,7 @@ const Home = () => {
         </h1>
       </div>
 
-      {/* Search Bar */}
+      {}
       <div className="flex justify-center mb-4">
         <input
           type="text"
@@ -141,11 +141,11 @@ const Home = () => {
         />
       </div>
 
-      {/* Loading or Error States */}
+      {}
       {isLoading && <p className="text-white text-center">Loading movies...</p>}
       {error && <p className="text-red-500 text-center">{error}</p>}
 
-      {/* Movie Display Grid */}
+      {}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {movies.length > 0 ? (
           movies.map((movie) => (
@@ -169,7 +169,7 @@ const Home = () => {
         )}
       </div>
 
-      {/* Movie Details Modal */}
+      {}
       {selectedMovie && (
         <MovieDetailPage movie={selectedMovie} onClose={handleCloseMovieDetails} />
       )}

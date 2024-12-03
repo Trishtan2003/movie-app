@@ -1,9 +1,9 @@
 import React from "react";
 
 const MovieDetailPage = ({ movie, onClose }) => {
-  // Convert rating to stars (out of 5 stars)
+  
   const renderStars = (rating) => {
-    const stars = Math.round(rating / 2); // Convert IMDb rating (out of 10) to 5 stars
+    const stars = Math.round(rating / 2); 
     let starElements = [];
     for (let i = 0; i < 5; i++) {
       starElements.push(
@@ -33,7 +33,7 @@ const MovieDetailPage = ({ movie, onClose }) => {
             <p className="text-xl text-gray-400">{movie.Genre}</p>
             <p className="text-sm mt-4">{movie.Plot}</p>
             <div className="flex items-center mt-4">
-              {movie.imdbRating && renderStars(Number(movie.imdbRating))} {/* Display movie rating */}
+              {movie.imdbRating && renderStars(Number(movie.imdbRating))} {}
               <span className="ml-2">{movie.imdbRating}</span>
             </div>
             <p className="mt-4">

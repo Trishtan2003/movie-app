@@ -1,11 +1,11 @@
-// src/utils/api.js
+
 
 import axios from "axios";
 
-const apiKey = "bb88e186"; // Replace with your OMDb API key
+const apiKey = "bb88e186"; 
 const apiUrl = "http://www.omdbapi.com/";
 
-// Function to fetch movies based on random titles
+
 export const fetchMovies = async () => {
   try {
     const randomTitles = [
@@ -13,7 +13,7 @@ export const fetchMovies = async () => {
       "Spider-Man", "Batman Begins", "Interstellar", "Avatar", "Shrek"
     ];
 
-    // Get random movie title
+
     const randomMovie = randomTitles[Math.floor(Math.random() * randomTitles.length)];
 
     const response = await axios.get(apiUrl, {

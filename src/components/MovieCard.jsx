@@ -1,7 +1,7 @@
-// src/components/MovieCard.jsx
+
 
 import React from "react";
-import { Link } from "react-router-dom";  // Link to navigate to movie details
+import { Link } from "react-router-dom";  
 
 const MovieCard = ({ movie }) => {
   return (

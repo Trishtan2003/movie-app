@@ -1,4 +1,4 @@
-// src/pages/Search.jsx
+
 import React, { useState } from "react";
 import { fetchMovies } from "../utils/api";
 import MovieRow from "../components/MovieRow";
