@@ -6,6 +6,8 @@ const apiKey = "bb88e186";
 const apiUrl = "http://www.omdbapi.com/";
 
 
+
+
 export const fetchMovies = async () => {
   try {
     const randomTitles = [
