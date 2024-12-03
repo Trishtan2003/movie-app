@@ -2,7 +2,8 @@
 
 import axios from "axios";
 
-const apiKey = "bb88e186"; 
+const apiKey = process.env.REACT_APP_OMDB_API_KEY;
+
 const apiUrl = "https://www.omdbapi.com/";
 
 
