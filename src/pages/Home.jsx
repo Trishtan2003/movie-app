@@ -12,7 +12,7 @@ const Home = () => {
   const [error, setError] = useState(null); 
 
   const apiKey = "bb88e186"; 
-  const apiUrl = "http://www.omdbapi.com/";
+  const apiUrl = "https://www.omdbapi.com/";
 
   
   useEffect(() => {
