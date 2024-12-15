@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import MovieDetailPage from "./MovieDetailPage";
-import dubflixLogo from "../assets/dubflix.png"; 
+import MovieDetailPage from "./MovieDetailPage"; // Movie detail page component
+import dubflixLogo from "../assets/dubflix.png"; // Logo
 
 const Home = () => {
   const [movies, setMovies] = useState([]); 
