@@ -1,17 +1,21 @@
+import { registerRoute } from 'workbox-routing';
+import { CacheFirst } from 'workbox-strategies';
+import { precacheAndRoute } from 'workbox-precaching';
 
-self.addEventListener('install', (event) => {
-  console.log('Service Worker installing.');
-  event.waitUntil(
-    caches.open('static-cache').then((cache) => {
-      return cache.addAll(['/index.html']);
-    })
-  );
-});
+precacheAndRoute(self.__WB_MANIFEST || []);
 
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
-  );
-});
+
+registerRoute(
+  ({ url }) => url.origin === 'https://www.omdbapi.com',
+  new CacheFirst({
+    cacheName: 'api-cache',
+    plugins: [
+      {
+        cacheWillUpdate: async ({ response }) => {
+          if (response.ok) return response;
+          return null;
+        },
+      },
+    ],
+  })
+);

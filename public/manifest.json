@@ -1,6 +1,7 @@
 {
   "short_name": "Dubflix",
-  "name": "Dubflix - Your Movie App",
+  "name": "Dubflix",
+  "description": "Dubflix is a movie-app project made by Trishtan Ervin G. Bartiquin. A student 3rd year college from St. Peter's College",
   "icons": [
     {
       "src": "favicon.ico",
@@ -21,5 +22,9 @@
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "service_worker": "/custom-service-worker.js"
 }
+
+
+
