@@ -1,6 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home'; // Your Home component
-import MovieDetailPage from './pages/MovieDetailPage'; // Optional, for movie detail page
+
+
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import MovieDetailPage from "./pages/MovieDetailPage";  
 
 const App = () => {
   return (
