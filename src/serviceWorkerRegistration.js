@@ -1,4 +1,3 @@
-// serviceWorkerRegistration.js
 const register = async () => {
   if ('serviceWorker' in navigator) {
     try {
