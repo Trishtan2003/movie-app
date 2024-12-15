@@ -1,5 +1,8 @@
-[[headers]]
-  for = "/service-worker.js"
-  
-  [headers.values]
-    "Content-Type" = "application/javascript"
+[build]
+  publish = "build"
+  functions = "src/functions"
+
+[[redirects]]
+  from = "/service-worker.js"
+  to = "/.netlify/functions/service-worker.js"
+  status = 200
