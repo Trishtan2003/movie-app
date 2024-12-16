@@ -5,7 +5,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'public/service-worker.js', to: 'service-worker.js' },
+        { from: '/service-worker.js', to: 'service-worker.js' },
       ],
     }),
   ],
