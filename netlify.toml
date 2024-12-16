@@ -1,8 +1,22 @@
+
 [build]
+  command = "npm run build"
   publish = "build"
-  functions = "src/functions"
+
 
 [[redirects]]
-  from = "/service-worker.js"
-  to = "/.netlify/functions/service-worker.js"
+  from = "/*"
+  to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Content-Type = "application/javascript"
+    Service-Worker-Allowed = "/"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "max-age=0, must-revalidate"
