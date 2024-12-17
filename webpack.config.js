@@ -1,13 +1,13 @@
-const path = require('path'); // Add this line to resolve the 'path' error
+const path = require('path');
 
 module.exports = {
-  entry: './src/index.js', // Adjust the path to your entry file if needed
+  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'build'), // Use the path module here
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: '/',
+    publicPath: './', // Use relative path for deployment
   },
-  mode: 'development', // Or 'production'
+  mode: 'development', // Change to 'production' for production builds
   module: {
     rules: [
       {
@@ -19,7 +19,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -28,10 +28,12 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public'), // Serve files from public folder
+      directory: path.join(__dirname, 'public'),
     },
     compress: true,
     port: 3000,
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true, // Ensures routing works correctly
+    },
   },
 };
