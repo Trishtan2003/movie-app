@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import MovieDetailPage from "./MovieDetailPage"; // Movie detail page component
-import dubflixLogo from "../assets/dubflix.png"; // Logo
+import MovieDetailPage from "./MovieDetailPage";
+import dubflixLogo from "../assets/dubflix.png"; 
 
 const Home = () => {
   const [movies, setMovies] = useState([]); 
@@ -14,7 +14,6 @@ const Home = () => {
   const apiKey = "bb88e186"; 
   const apiUrl = "https://www.omdbapi.com/";
 
-  
   useEffect(() => {
     const fetchRandomMovies = async () => {
       setIsLoading(true);
@@ -48,7 +47,6 @@ const Home = () => {
     fetchRandomMovies();
   }, []);
 
-  
   const fetchMoviesByQuery = async (query) => {
     setIsLoading(true);
     setError(null);
@@ -60,7 +58,6 @@ const Home = () => {
 
       if (response.data.Response === "True") {
         const sortedMovies = response.data.Search.sort((a, b) => {
-          
           return a.Year - b.Year;
         });
         setMovies(sortedMovies);
@@ -75,7 +72,6 @@ const Home = () => {
     }
   };
 
-  
   const handleMovieClick = async (movie) => {
     try {
       const response = await axios.get(apiUrl, {
@@ -92,35 +88,29 @@ const Home = () => {
     }
   };
 
-  
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
 
     if (query.trim() === "") {
-      
       setMovies(originalMovies);
     } else {
-      
       fetchMoviesByQuery(query);
     }
   };
 
-  
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && searchQuery.trim() !== "") {
       fetchMoviesByQuery(searchQuery.trim());
     }
   };
 
-  
   const handleCloseMovieDetails = () => {
     setSelectedMovie(null);
   };
 
   return (
     <div className="p-6 bg-gray-800 min-h-screen">
-      {}
       <div className="flex items-center mb-4">
         <img src={dubflixLogo} alt="Dubflix Logo" className="h-12 mr-4" />
         <h1 className="text-white text-3xl font-bold">
@@ -129,7 +119,6 @@ const Home = () => {
         </h1>
       </div>
 
-      {}
       <div className="flex justify-center mb-4">
         <input
           type="text"
@@ -141,11 +130,9 @@ const Home = () => {
         />
       </div>
 
-      {}
       {isLoading && <p className="text-white text-center">Loading movies...</p>}
       {error && <p className="text-red-500 text-center">{error}</p>}
 
-      {}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {movies.length > 0 ? (
           movies.map((movie) => (
@@ -169,7 +156,6 @@ const Home = () => {
         )}
       </div>
 
-      {}
       {selectedMovie && (
         <MovieDetailPage movie={selectedMovie} onClose={handleCloseMovieDetails} />
       )}
