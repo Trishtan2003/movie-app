@@ -13,7 +13,7 @@ const Home = () => {
   const apiKey = "bb88e186"; 
   const apiUrl = "https://www.omdbapi.com/";
 
-  // Offline detection and caching
+  
   useEffect(() => {
     const checkNetworkStatus = () => {
       setIsOffline(!navigator.onLine);
@@ -27,7 +27,7 @@ const Home = () => {
     };
   }, []);
 
-  // Fetch random movies for initial display
+  
   useEffect(() => {
     const fetchRandomMovies = async () => {
       setIsLoading(true);
@@ -77,7 +77,7 @@ const Home = () => {
     fetchRandomMovies();
   }, [isOffline]);
 
-  // Fetch movies based on search query
+  
   const fetchMoviesByQuery = async (query) => {
     setIsLoading(true);
     setError(null);
@@ -119,7 +119,7 @@ const Home = () => {
     }
   };
 
-  // Fetch full details of the selected movie
+  
   const handleMovieClick = async (movie) => {
     try {
       if (isOffline) {
@@ -151,7 +151,7 @@ const Home = () => {
     }
   };
 
-  // Handle search input change
+  
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -162,14 +162,13 @@ const Home = () => {
     }
   };
 
-  // Trigger search on pressing Enter
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && searchQuery.trim() !== "") {
       fetchMoviesByQuery(searchQuery.trim());
     }
   };
 
-  // Close the movie details modal
+  
   const handleCloseMovieDetails = () => {
     setSelectedMovie(null);
   };
