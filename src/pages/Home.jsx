@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieDetailPage from "./MovieDetailPage";
@@ -11,6 +9,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false); 
   const [error, setError] = useState(null); 
   const [isOffline, setIsOffline] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null); // Declare selectedMovie and its state setter
 
   const apiKey = "bb88e186"; 
   const apiUrl = "https://www.omdbapi.com/";
@@ -133,7 +132,7 @@ const Home = () => {
         
         if (cachedResponse) {
           const cachedMovieDetails = await cachedResponse.json();
-          setSelectedMovie(cachedMovieDetails);
+          setSelectedMovie(cachedMovieDetails); // Corrected the issue here
           return;
         }
       }
@@ -171,4 +170,3 @@ const Home = () => {
 };
 
 export default Home;
-
