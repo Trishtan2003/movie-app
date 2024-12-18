@@ -7,8 +7,6 @@ import dubflixLogo from "../assets/dubflix.png";
 
 const Home = () => {
   const [movies, setMovies] = useState([]); 
-  const [originalMovies, setOriginalMovies] = useState([]); 
-  const [selectedMovie, setSelectedMovie] = useState(null); 
   const [searchQuery, setSearchQuery] = useState(""); 
   const [isLoading, setIsLoading] = useState(false); 
   const [error, setError] = useState(null); 
@@ -19,19 +17,15 @@ const Home = () => {
 
   // Offline detection and caching
   useEffect(() => {
-    // Check network status
     const checkNetworkStatus = () => {
       setIsOffline(!navigator.onLine);
     };
 
-    // Add event listeners
     window.addEventListener('online', checkNetworkStatus);
     window.addEventListener('offline', checkNetworkStatus);
 
-    // Initial check
     checkNetworkStatus();
 
-    // Cleanup
     return () => {
       window.removeEventListener('online', checkNetworkStatus);
       window.removeEventListener('offline', checkNetworkStatus);
@@ -44,7 +38,6 @@ const Home = () => {
       setError(null);
 
       try {
-        // Try to fetch from cache first if offline
         if (isOffline) {
           const cache = await caches.open('movies-cache');
           const cachedResponse = await cache.match('random-movies');
@@ -52,14 +45,13 @@ const Home = () => {
           if (cachedResponse) {
             const cachedMovies = await cachedResponse.json();
             setMovies(cachedMovies);
-            setOriginalMovies(cachedMovies);
             setIsLoading(false);
             return;
           }
         }
 
         const moviePromises = [];
-        for (let i = 1; i <= 3; i++) { 
+        for (let i = 1; i <= 3; i++) {
           moviePromises.push(
             axios.get(apiUrl, {
               params: { s: "movie", apikey: apiKey, page: i },
@@ -73,14 +65,12 @@ const Home = () => {
           .flat()
           .filter(Boolean); 
         
-        // Cache movies for offline use
         if (!isOffline) {
           const cache = await caches.open('movies-cache');
           await cache.put('random-movies', new Response(JSON.stringify(fetchedMovies)));
         }
 
         setMovies(fetchedMovies);
-        setOriginalMovies(fetchedMovies); 
       } catch (error) {
         console.error("Error fetching random movies:", error);
         setError("Failed to fetch movies.");
@@ -97,7 +87,6 @@ const Home = () => {
     setError(null);
 
     try {
-      // Check if offline and use cached results
       if (isOffline) {
         const cache = await caches.open('movies-cache');
         const cachedResponse = await cache.match(`search-${query}`);
@@ -119,7 +108,6 @@ const Home = () => {
           return a.Year - b.Year;
         });
         
-        // Cache search results
         if (!isOffline) {
           const cache = await caches.open('movies-cache');
           await cache.put(`search-${query}`, new Response(JSON.stringify(sortedMovies)));
@@ -139,7 +127,6 @@ const Home = () => {
 
   const handleMovieClick = async (movie) => {
     try {
-      // Check if offline and use cached movie details
       if (isOffline) {
         const cache = await caches.open('movie-details-cache');
         const cachedResponse = await cache.match(`movie-${movie.imdbID}`);
@@ -156,7 +143,6 @@ const Home = () => {
       });
 
       if (response.data) {
-        // Cache movie details
         if (!isOffline) {
           const cache = await caches.open('movie-details-cache');
           await cache.put(`movie-${movie.imdbID}`, new Response(JSON.stringify(response.data)));
@@ -170,8 +156,6 @@ const Home = () => {
       console.error("Error fetching movie details:", error);
     }
   };
-
-  // ... rest of the existing code remains the same
 
   return (
     <div className="p-6 bg-gray-800 min-h-screen">
@@ -187,3 +171,4 @@ const Home = () => {
 };
 
 export default Home;
+
