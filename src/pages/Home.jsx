@@ -123,7 +123,10 @@ const Home = () => {
       {/* Logo */}
       <div className="flex items-center mb-4">
         <img src={dubflixLogo} alt="Dubflix Logo" className="h-12 mr-4" />
-        <h1 className="text-white text-3xl font-bold">Dubflix</h1>
+        <h1 className="text-3xl font-bold">
+          <span className="text-red-500">Dub</span>
+          <span className="text-white">flix</span>
+        </h1>
       </div>
 
       {/* Search Bar */}
@@ -148,13 +151,13 @@ const Home = () => {
           movies.map((movie) => (
             <div
               key={movie.imdbID}
-              className="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 cursor-pointer"
+              className="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 cursor-pointer relative"
               onClick={() => handleMovieClick(movie)}
             >
               <img
                 src={movie.Poster}
                 alt={movie.Title}
-                className="w-full h-auto rounded-md mb-2"
+                className="w-full h-auto rounded-md mb-2 aspect-h-1 aspect-w-1 object-cover"
               />
               <h3 className="text-white">{movie.Title}</h3>
               <p className="text-gray-400">{movie.Year}</p>
