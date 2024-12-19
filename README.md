@@ -1,4 +1,4 @@
-Live Demo Here https://dubflixx.netlify.app/
+Live Demo Here https://spcdubflix.netlify.app/
 
 # Getting Started with Create React App
 
